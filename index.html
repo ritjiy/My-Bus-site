@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RitTech - World-Class Digital Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* CSS Variables for Brown Theme */
+        :root {
+            --primary-brown: #6F4E37; /* Main brown color */
+            --primary-brown-dark: #5A3D2C; /* Darker shade for hover */
+            --primary-brown-light: #8B6A55; /* Lighter shade for accents */
+            --background-light: #F5F1EE; /* Light off-white for backgrounds */
+            --background-dark: #E6D9D1; /* Slightly darker for contrast */
+            --text-color: #3E2D21; /* Dark brown for text */
+            --white: #FFFFFF; /* Pure white */
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --border-radius: 10px;
+            --transition: all 0.3s ease;
+        }
+
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            color: var(--text-color);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+        a {
+            text-decoration: none;
+            color: var(--primary-brown);
+        }
+        a:hover {
+            color: var(--primary-brown-dark);
+        }
+
+        /* Navigation Styles */
+        nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: var(--background-dark);
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+        nav a {
+            color: var(--text-color);
+            font-size: 16px;
+            font-weight: 600;
+            padding: 10px 20px;
+            transition: var(--transition);
+        }
+        nav a:hover {
+            color: var(--primary-brown);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .hero img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .hero img.active {
+            opacity: 1;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        .hero-overlay {
+            position: relative;
+            z-index: 2;
+            padding: 40px;
+            border-radius: var(--border-radius);
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: var(--white);
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        .hero-buttons button {
+            background-color: var(--primary-brown);
+            color: var(--white);
+            padding: 15px 30px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+        .hero-buttons button:hover {
+            background-color: var(--primary-brown-dark);
+        }
+
+        /* Container Styles */
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Card Styles */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background-color: var(--white);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        .who-we-are-headings{
+            margin-bottom: 50px;
+        }
+        .who-we-are .card i {
+            font-size: 40px;
+            color: var(--primary-brown);
+            margin-bottom: 10px;
+        }
+
+        /* Portfolio Styles */
+        .portfolio .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+        }
+
+        /* Clients Section */
+        .clients {
+            background-color: var(--background-light);
+            padding: 40px 0;
+        }
+        .clients h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            color: var(--text-color);
+        }
+        .clients-slider {
+            overflow: hidden;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .clients-container {
+            display: flex;
+            animation: scroll 20s linear infinite;
+        }
+        .client {
+            min-width: 150px;
+            text-align: center;
+            margin: 0 20px;
+        }
+        .client img {
+            width: 100%;
+            height: 100px;
+            object-fit: contain;
+            transition: var(--transition);
+        }
+        .client img:hover {
+            transform: scale(1.1);
+        }
+        .client-name {
+            margin-top: 10px;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Get a Quote Section */
+        .quote-section {
+            background-color: var(--white);
+            padding: 60px 20px;
+            margin: 0;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        .quote-section h2 {
+            margin-bottom: 30px;
+            color: var(--text-color);
+            font-size: 2.5rem;
+            text-align: center;
+            font-weight: 700;
+        }
+        .quote-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        .form-row input,
+        .form-row select,
+        .quote-form textarea {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            width: 100%;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        .form-row input:focus,
+        .form-row select:focus,
+        .quote-form textarea:focus {
+            border-color: var(--primary-brown);
+            box-shadow: 0 0 0 3px rgba(111, 78, 55, 0.1);
+            outline: none;
+        }
+        .quote-form textarea {
+            resize: none;
+            height: 120px;
+        }
+        .quote-form button {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            background-color: var(--primary-brown);
+            color: var(--white);
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .quote-form button:hover {
+            background-color: var(--primary-brown-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Alternate Background Colors for Sections */
+        section:nth-child(odd) {
+            background-color: var(--background-light);
+        }
+        section:nth-child(even) {
+            background-color: var(--background-dark);
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--primary-brown);
+            color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            padding: 40px;
+            flex-wrap: wrap;
+        }
+        .footer-links, .footer-social, .footer-subscribe, .footer-contact {
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+        }
+        .footer-links p, .footer-contact p {
+            margin: 5px 0;
+        }
+        .footer-social i {
+            font-size: 24px;
+            margin-right: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .footer-social i:hover {
+            color: var(--background-light);
+        }
+        .footer-subscribe input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            width: 70%;
+            margin-right: 10px;
+        }
+        .footer-subscribe button {
+            padding: 10px 15px;
+            background-color: var(--primary-brown-dark);
+            color: var(--white);
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .footer-subscribe button:hover {
+            background-color: var(--primary-brown);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#quote">Get a Quote</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <div class="hero" id="home">
+        <img class="active" src="img/h1.jpg" alt="Hero Image 1">
+        <img src="img/h2.jpg" alt="Hero Image 2">
+        <img src="img/h3.jpg" alt="Hero Image 3">
+        <img src="img/h4.jpg" alt="Hero Image 4">
+        <img src="img/h5.jpg" alt="Hero Image 5">
+        <div class="hero-overlay">
+            <h1 class="hero-text">Welcome to RitTech</h1>
+            <div class="hero-buttons">
+                <button>Get a Quote</button>
+                <button>Our Projects</button>
+            </div>
+        </div>
+    </div>
+    <div id="about" class="container who-we-are">
+        <div class="who-we-are-headings">
+            <h2>Who We Are & What We Do</h2>
+        <p>At RitTech, we are passionate about delivering innovative and impactful digital solutions that empower businesses to thrive in a competitive world. Our team of skilled professionals combines cutting-edge technology, creativity, and industry expertise to offer tailored services that meet your unique needs.</p>
+        <p>From website and software development to AI-driven automation, videography, and photography, we specialize in creating world-class digital experiences. Our mission is to help businesses transform, grow, and achieve their goals with solutions that are as unique as they are effective.</p>
+        </div>
+        <div class="card-container">
+            <div class="card"> <i class="fas fa-bullseye"></i> <h3>Our Mission</h3> <p>Delivering innovative and impactful technology solutions to businesses worldwide.</p></div>
+            <div class="card"> <i class="fas fa-lightbulb"></i> <h3>Our Vision</h3> <p>To be the leading provider of cutting-edge digital services.</p></div>
+            <div class="card"> <i class="fas fa-users"></i> <h3>Our Values</h3> <p>Innovation, Excellence, and Customer Satisfaction.</p></div>
+        </div>
+    </div>
+    <div id="portfolio" class="container">
+        <h2>Our Work</h2>
+        <div class="card-container">
+            <div class="card"> 
+                <img class="portfolio-image" src="img/p1.jpg" alt="Project 1"> 
+                <h3>Website for XYZ</h3> 
+                <p>A custom-built website with modern UX/UI.</p>
+                <a href="#" style="color: var(--primary-brown);">View More</a>
+            </div>
+            <div class="card"> 
+                <img class="portfolio-image" src="img/p2.jpg" alt="Project 2"> 
+                <h3>AI Automation</h3> 
+                <p>AI-powered automation to streamline workflows.</p>
+                <a href="#" style="color: var(--primary-brown);">View More</a>
+            </div>
+            <div class="card"> 
+                <img class="portfolio-image" src="img/p3.jpg" alt="Project 3"> 
+                <h3>Brand Videography</h3> 
+                <p>Professional videography for brand storytelling.</p>
+                <a href="#" style="color: var(--primary-brown);">View More</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Get a Quote Section -->
+    <div class="quote-section" id="quote">
+        <h2>Get a Quote</h2>
+        <form class="quote-form">
+            <h3>Contact Information:</h3>
+            <div class="form-row">
+                <input type="text" placeholder="Full Name (required)" required>
+                <input type="email" placeholder="Email Address (required)" required>
+            </div>
+            <input type="tel" placeholder="Phone Number (optional)">
+
+            <h3>Project Details:</h3>
+            <div class="form-row">
+                <select required>
+                    <option value="" disabled selected>Project Type</option>
+                    <option value="website-development">Website Development</option>
+                    <option value="software-development">Software Development</option>
+                    <option value="automation">Automation</option>
+                    <option value="videography">Videography</option>
+                    <option value="photography">Photography</option>
+                </select>
+                <input type="text" placeholder="Estimated Budget (e.g., $500-$1000)" required>
+            </div>
+            <textarea placeholder="Brief Project Description" rows="3" required></textarea>
+            <select required>
+                <option value="" disabled selected>Desired Timeline</option>
+                <option value="1-month">1 Month</option>
+                <option value="3-months">3 Months</option>
+                <option value="6-months">6 Months</option>
+                <option value="flexible">Flexible</option>
+            </select>
+
+            <h3>Additional Information:</h3>
+            <input type="file" placeholder="Upload File/Attachment (optional)">
+            <select required>
+                <option value="" disabled selected>Preferred Method of Contact</option>
+                <option value="email">Email</option>
+                <option value="phone">Phone</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label>
+                <input type="checkbox" required>
+                I agree to the terms and conditions.
+            </label>
+            <button type="submit">Get a Quote</button>
+        </form>
+    </div>
+
+    <!-- Clients Section -->
+    <div class="clients">
+        <h2>Our Clients</h2>
+        <div class="clients-slider">
+            <div class="clients-container">
+                <!-- Original Logos -->
+                <div class="client">
+                    <img src="img/t1.jpg" alt="Client 1">
+                    <div class="client-name">Client 1</div>
+                </div>
+                <div class="client">
+                    <img src="img/t2.jpg" alt="Client 2">
+                    <div class="client-name">Client 2</div>
+                </div>
+                <div class="client">
+                    <img src="img/t3.jpg" alt="Client 3">
+                    <div class="client-name">Client 3</div>
+                </div>
+                <div class="client">
+                    <img src="img/t4.jpg" alt="Client 4">
+                    <div class="client-name">Client 4</div>
+                </div>
+                <div class="client">
+                    <img src="img/t5.jpg" alt="Client 5">
+                    <div class="client-name">Client 5</div>
+                </div>
+                <div class="client">
+                    <img src="img/t6.jpg" alt="Client 6">
+                    <div class="client-name">Client 6</div>
+                </div>
+                <div class="client">
+                    <img src="img/t7.jpg" alt="Client 7">
+                    <div class="client-name">Client 7</div>
+                </div>
+                <!-- Duplicate Logos for Smooth Looping -->
+                <div class="client">
+                    <img src="img/t1.jpg" alt="Client 1">
+                    <div class="client-name">Client 1</div>
+                </div>
+                <div class="client">
+                    <img src="img/t2.jpg" alt="Client 2">
+                    <div class="client-name">Client 2</div>
+                </div>
+                <div class="client">
+                    <img src="img/t3.jpg" alt="Client 3">
+                    <div class="client-name">Client 3</div>
+                </div>
+                <div class="client">
+                    <img src="img/t4.jpg" alt="Client 4">
+                    <div class="client-name">Client 4</div>
+                </div>
+                <div class="client">
+                    <img src="img/t5.jpg" alt="Client 5">
+                    <div class="client-name">Client 5</div>
+                </div>
+                <div class="client">
+                    <img src="img/t6.jpg" alt="Client 6">
+                    <div class="client-name">Client 6</div>
+                </div>
+                <div class="client">
+                    <img src="img/t7.jpg" alt="Client 7">
+                    <div class="client-name">Client 7</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <h3>Quick Links</h3>
+            <p>Home</p>
+            <p>About</p>
+            <p>Services</p>
+            <p>Portfolio</p>
+            <p>Contact</p>
+        </div>
+        <div class="footer-social">
+            <h3>Follow Us</h3>
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-instagram"></i>
+        </div>
+        <div class="footer-subscribe">
+            <h3>Subscribe to Newsletter</h3>
+            <input type="email" placeholder="Your email">
+            <button>Subscribe</button>
+        </div>
+        <div class="footer-contact">
+            <h3>Contact Us</h3>
+            <p>Phone: (123) 456-7890</p>
+            <p>Email: info@rittech.com</p>
+            <p>Address: 123 Tech Lane, Innovation City, ST 12345</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for the slideshow
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.hero img');
+        const texts = [
+            "Welcome to RitTech",
+            "Innovative Solutions for Your Business",
+            "Transforming Ideas into Reality",
+            "Empowering Your Digital Journey",
+            "Your Partner in Technology"
+        ];
+
+        function showNextImage() {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % images.length; // Loop back to the first image
+            images[currentIndex].classList.add('active');
+
+            // Update the text for the current image
+            document.querySelector('.hero-overlay h1').textContent = texts[currentIndex];
+        }
+
+        // Show the next image every 5 seconds
+        setInterval(showNextImage, 5000);
+    </script>
+</body>
+</html>
